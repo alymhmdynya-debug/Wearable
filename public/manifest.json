@@ -1,0 +1,21 @@
+{
+  "name": "ESMY DAHAB - إسمي ذهب",
+  "short_name": "إسمي ذهب",
+  "description": "Personal Royal Profile Viewer and VIP Social Card.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0c0e",
+  "theme_color": "#D4AF37",
+  "icons": [
+    {
+      "src": "/logo_pwa.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo_pwa.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

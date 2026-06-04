@@ -1,0 +1,8 @@
+{
+  "name": "ESMY DAHAB - إسمي ذهب",
+  "description": "Personal Royal Profile Viewer and VIP Social Card for the luxury brand ESMY DAHAB.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

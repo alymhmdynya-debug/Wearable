@@ -1,0 +1,147 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Personal royal profile details for ESMY DAHAB members",
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Unique lowercase identifier (e.g. adam)"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Premium display name"
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Hosted profile picture URL via ImgBB"
+        },
+        "bio": {
+          "type": "string",
+          "description": "Short bio description of the royal member"
+        },
+        "level": {
+          "type": "number",
+          "description": "Membership tier: 1 = Bronze, 2 = Silver, 3 = Gold"
+        },
+        "referralCount": {
+          "type": "number",
+          "description": "Number of unique visitors referred"
+        },
+        "likes": {
+          "type": "number",
+          "description": "Number of organic profile likes from visitors"
+        },
+        "accessCode": {
+          "type": "string",
+          "description": "The golden hardware access code matched from the piece"
+        }
+      },
+      "required": [
+        "username",
+        "displayName",
+        "photoUrl",
+        "bio",
+        "level",
+        "referralCount",
+        "likes",
+        "accessCode"
+      ]
+    },
+    "Referral": {
+      "title": "Referral Interaction",
+      "description": "Tracks unique visitor traffic based on referring creator usernames",
+      "type": "object",
+      "properties": {
+        "fromUsername": {
+          "type": "string",
+          "description": "The referrer's username"
+        },
+        "visitorId": {
+          "type": "string",
+          "description": "A unique identifier generated for the visitor's browser session"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Firebase Server Timestamp of interaction creation"
+        }
+      },
+      "required": [
+        "fromUsername",
+        "visitorId",
+        "timestamp"
+      ]
+    },
+    "AccessCode": {
+      "title": "Hardware Access Code",
+      "description": "List of authentic gold-piece luxury authorization codes",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Exact access code upper-cased (e.g. ESM-123)"
+        },
+        "used": {
+          "type": "boolean",
+          "description": "True if code is registered under a member account"
+        },
+        "associatedUsername": {
+          "type": "string",
+          "description": "The member username linked to this code"
+        },
+        "associatedUid": {
+          "type": "string",
+          "description": "The raw firebase auth UID linked"
+        }
+      },
+      "required": [
+        "code",
+        "used"
+      ]
+    },
+    "Config": {
+      "title": "App Layout Asset Configuration",
+      "description": "Royal level tier assets and badge icons configuration",
+      "type": "object",
+      "properties": {
+        "stage1": {
+          "type": "string",
+          "description": "Stage 1 Bronze Level Badge icon link"
+        },
+        "stage2": {
+          "type": "string",
+          "description": "Stage 2 Silver Level Badge icon link"
+        },
+        "stage3": {
+          "type": "string",
+          "description": "Stage 3 Gold Level Badge icon link"
+        }
+      },
+      "required": [
+        "stage1",
+        "stage2",
+        "stage3"
+      ]
+    }
+  },
+  "firestore": {
+    "users/{uid}": {
+      "schema": "User",
+      "description": "User accounts indexed by their Firebase internal UID"
+    },
+    "referrals/{referralId}": {
+      "schema": "Referral",
+      "description": "A flat directory of visitor actions mapped to verify referrers"
+    },
+    "accessCodes/{codeId}": {
+      "schema": "AccessCode",
+      "description": "List of hardware codes used for authenticating PWA profiles"
+    },
+    "config/{configId}": {
+      "schema": "Config",
+      "description": "Root configurations representing admin level graphics"
+    }
+  }
+}

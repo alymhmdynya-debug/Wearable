@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom golden gradients, sparkles, and particle styles */
+.text-gold {
+  background: linear-gradient(135deg, #FFF 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+}
+
+.border-gold {
+  border-image: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C) 1;
+}
+
+/* Metallic silver gradient */
+.text-silver {
+  background: linear-gradient(135deg, #E0E0E0 0%, #F5F5F5 50%, #9E9E9E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-silver-gradient {
+  background: linear-gradient(135deg, #B0B0B0, #FFFFFF, #8A8A8A, #F0F0F0, #707070);
+}
+
+/* Sleek Bronze */
+.text-bronze {
+  background: linear-gradient(135deg, #CD7F32 0%, #F5D6C6 50%, #8C5220 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-bronze-gradient {
+  background: linear-gradient(135deg, #CD7F32, #E6A172, #9E5B22, #F5D6C6, #733B10);
+}
+
+/* Particle sparkles */
+@keyframes luxuryFloat {
+  0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-120px) rotate(360deg); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  pointer-events: none;
+  animation: luxuryFloat infinite linear;
+}
+
+/* Layout transition styles */
+.slide-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
