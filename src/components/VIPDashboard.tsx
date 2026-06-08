@@ -599,10 +599,8 @@ export default function VIPDashboard({ onBackToCard }: VIPDashboardProps) {
   const handleCopyLink = () => {
     if (!profile) return;
     const shareUrl = `https://esmy-dahab.pages.dev/${profile.username}?ref=${profile.username}`;
-    // Gorgeous Arabic customized promotion text
-    const promotionText = `انضم إلي بزيارة بروفايلي المذهب والاطلاع على قطعي المصممة خصيصاً من إسمي ذهب! ✨ رابط التفاصيل: ${shareUrl}`;
     
-    navigator.clipboard.writeText(promotionText)
+    navigator.clipboard.writeText(shareUrl)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 3000);
@@ -867,12 +865,18 @@ export default function VIPDashboard({ onBackToCard }: VIPDashboardProps) {
         
         <div className="flex items-center gap-4 text-right">
           <div className="relative w-16 h-16 shrink-0 z-10">
-            {activeProfile.level === RoyalLevel.GOLD && (
-              <Crown className="w-5.5 h-5.5 absolute -top-4 left-1/2 -translate-x-1/2 text-[#D4AF37] animate-bounce" />
-            )}
-            <div className={`w-full h-full rounded-full p-[2px] ${
-              activeProfile.level === RoyalLevel.GOLD ? 'bg-gold-gradient' : 
-              activeProfile.level === RoyalLevel.SILVER ? 'bg-silver-gradient' : 'bg-bronze-gradient'
+            {/* Elegant static tilted level metallic crown top-left of dashboard avatar */}
+            <div className="absolute -top-3 -left-2.5 -rotate-[22deg] z-10 filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]">
+              <Crown className={`w-5 h-5 ${
+                activeProfile.level === 3 ? 'text-[#D4AF37]' :
+                activeProfile.level === 2 ? 'text-[#C0C0C0]' : 'text-[#CD7F32]'
+              } fill-current/10`} />
+            </div>
+            
+            <div className={`w-full h-full rounded-full p-[2px] bg-gradient-to-tr ${
+              activeProfile.level === 3 ? 'from-[#BF953F] via-[#FCF6BA] to-[#AA771C]' : 
+              activeProfile.level === 2 ? 'from-[#888888] via-[#F0F0F0] to-[#555555]' : 
+              'from-[#8C3F10] via-[#F5D6C6] to-[#592606]'
             }`}>
               <div className="w-full h-full rounded-full bg-[#111] overflow-hidden">
                 <img 
@@ -1168,12 +1172,12 @@ export default function VIPDashboard({ onBackToCard }: VIPDashboardProps) {
             {copied ? (
               <>
                 <Check className="w-4 h-4 text-black" />
-                <span>تم نسخ التوصية الحصرية</span>
+                <span>تم نسخ الرابط الفخم بنجاح 🔗</span>
               </>
             ) : (
               <>
                 <Copy className="w-4 h-4 text-black" />
-                <span>نسخ منشور المشاركة الفخم ✨</span>
+                <span>نسخ رابط المشاركة الفاخر 🔗</span>
               </>
             )}
           </button>

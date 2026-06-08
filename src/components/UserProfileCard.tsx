@@ -57,33 +57,33 @@ export default function UserProfileCard({ profile, onGoToDashboard }: UserProfil
         return {
           title: 'الذهبي الملكي',
           sub: 'Royal Gold Member',
-          borderColor: 'border-transparent bg-gradient-to-r from-[#BF953F] via-[#FCF6BA] to-[#AA771C]',
+          frameGradient: 'from-[#BF953F] via-[#FCF6BA] to-[#AA771C]',
           textStyle: 'text-gold font-bold',
           badgeBg: 'bg-gold-gradient text-black',
-          glow: 'shadow-[0_0_30px_rgba(212,175,55,0.4)]',
-          crown: true,
+          glow: 'shadow-[0_0_35px_rgba(212,175,55,0.45)]',
+          crownColor: 'text-[#D4AF37]',
           labelAr: 'الفئة الذهبية 👑',
         };
       case 2:
         return {
           title: 'الفضي الفاخر',
           sub: 'Platinum Silver Member',
-          borderColor: 'border-transparent bg-gradient-to-r from-[#B0B0B0] via-[#FFFFFF] to-[#707070]',
+          frameGradient: 'from-[#888888] via-[#F0F0F0] to-[#555555]',
           textStyle: 'text-silver font-semibold',
           badgeBg: 'bg-silver-gradient text-black',
-          glow: 'shadow-[0_0_20px_rgba(255,255,255,0.2)]',
-          crown: false,
+          glow: 'shadow-[0_0_25px_rgba(255,255,255,0.25)]',
+          crownColor: 'text-[#C0C0C0]',
           labelAr: 'الفئة الفضية 🥈',
         };
       default:
         return {
           title: 'البرونزي العريق',
           sub: 'Bronze Member',
-          borderColor: 'border-transparent bg-gradient-to-r from-[#CD7F32] via-[#F5D6C6] to-[#733B10]',
+          frameGradient: 'from-[#8C3F10] via-[#F5D6C6] to-[#592606]',
           textStyle: 'text-bronze font-medium',
           badgeBg: 'bg-bronze-gradient text-white',
-          glow: 'shadow-[0_0_15px_rgba(205,127,50,0.15)]',
-          crown: false,
+          glow: 'shadow-[0_0_20px_rgba(205,127,50,0.2)]',
+          crownColor: 'text-[#CD7F32]',
           labelAr: 'الفئة البرونزية 🥉',
         };
     }
@@ -93,17 +93,12 @@ export default function UserProfileCard({ profile, onGoToDashboard }: UserProfil
 
   const handleShare = () => {
     const url = `${window.location.origin}/${profile.username}`;
-    if (navigator.share) {
-      navigator.share({
-        title: `${profile.displayName} - إسمي ذهب`,
-        text: `الملف الشخصي الملكي الحصري لـ ${profile.displayName} في إسمي ذهب`,
-        url,
-      }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(url);
-      setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 3000);
-    }
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 3000);
+      })
+      .catch((err) => console.error("Clipboard copy failed", err));
   };
 
   return (
@@ -128,7 +123,7 @@ export default function UserProfileCard({ profile, onGoToDashboard }: UserProfil
           <div className="flex flex-col items-center mb-6">
             <div className="flex items-center gap-1.5 select-none">
               <span className="text-[10px] tracking-[0.2em] text-[#D4AF37]/70 uppercase font-serif">ESMY DAHAB</span>
-              <Star className="w-2.5 h-2.5 text-[#D4AF37] fill-[#D4AF37] animate-pulse" />
+              <Star className="w-2.5 h-2.5 text-[#D4AF37] fill-[#D4AF37]" />
             </div>
             <h1 className="text-xl font-bold font-serif text-gold tracking-widest mt-1">
               إسمي ذهب
@@ -138,11 +133,12 @@ export default function UserProfileCard({ profile, onGoToDashboard }: UserProfil
 
           {/* Member Avatar Image Frame of "Elegant Dark" design structure */}
           <div className="relative mb-6 mt-4">
-            {tier.crown && (
-              <div className="absolute -top-9 left-1/2 -translate-x-1/2 text-3xl animate-bounce" style={{ animationDuration: '4s' }}>👑</div>
-            )}
+            {/* Elegant static tilted crown top-left of avatar container */}
+            <div className="absolute -top-3.5 -left-3 -rotate-[22deg] z-10 filter drop-shadow-[0_4px_8px_rgba(0,0,0,0.6)]">
+              <Crown className={`w-9 h-9 ${tier.crownColor} fill-current/10`} />
+            </div>
             
-            <div className={`w-36 h-36 rounded-full p-1 bg-gradient-to-tr from-[#D4AF37] via-[#FFF5B7] to-[#8E6E17] shadow-xl ${tier.glow}`}>
+            <div className={`w-36 h-36 rounded-full p-1 bg-gradient-to-tr ${tier.frameGradient} shadow-xl ${tier.glow}`}>
               <div className="w-full h-full rounded-full border-4 border-[#0A0A0A] bg-[#222] flex items-center justify-center overflow-hidden">
                 {profile.photoUrl ? (
                   <img 
